@@ -1,0 +1,37 @@
+---
+// ? hace las propiedades opcionales
+export interface Props {
+	name?: string;
+	urlImage?: string;
+}
+
+const {name = "Nombre Default", urlImage} = Astro.props;
+---
+
+<div class="card">
+	<img src={urlImage} alt="Imagen Pokemon" />
+	<div class="container">
+		<h4><b>{name.toUpperCase()}</b></h4>
+	</div>
+</div>
+
+<style>
+	.card {
+		text-align: center;
+
+		/* Add shadows to create the "card" effect */
+		transition: 0.3s;
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	}
+
+	/* On mouse-over, add a deeper shadow */
+	.card:hover {
+		box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+	}
+
+	/* Add some padding inside the card container */
+	.container {
+		margin: auto;
+		padding: 2px 16px;
+	}
+</style>

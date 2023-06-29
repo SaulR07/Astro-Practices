@@ -1,0 +1,57 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
+
+const title = "POKEDEX";
+
+//Se llama un API
+const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=12&offset=0");
+const data = await response.json();
+console.log(data);
+---
+
+<Layout title={title}>
+	<main>
+		<h1 class="text-gradient"><span class="text-gradient">{title}</span></h1>
+		<div class="wrapper">
+			{
+				data.results.map(async (result) => {
+					let responsePokemon = await fetch(result.url);
+					let dataPokemon = await responsePokemon.json();
+					let url = dataPokemon.sprites.other.dream_world.front_default;
+					let url2 =
+						"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" +
+						dataPokemon.id +
+						".png";
+					return <Card name={result.name} urlImage={url2} />;
+				})
+			}
+		</div>
+	</main>
+</Layout>
+
+<style>
+	main {
+		margin: auto;
+		padding: 1.5rem;
+	}
+	h1 {
+		font-size: 3rem;
+		font-weight: 800;
+		margin: 0;
+		text-align: center;
+	}
+	.text-gradient {
+		background-image: var(--accent-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-size: 400%;
+		background-position: 0%;
+	}
+	.wrapper {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		grid-gap: 10px;
+		grid-auto-rows: minmax(100px, auto);
+	}
+</style>

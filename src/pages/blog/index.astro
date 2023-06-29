@@ -1,0 +1,22 @@
+---
+import ImageGitHub from "../../images/github.png";
+const posts = await Astro.glob("./*.md"); // devuelve un array de artículos
+console.log(posts);
+---
+
+<h1>Indice de Blog's</h1>
+<img width="100" src="../../../public/Blog-intro.jpg" />
+
+<div>
+	{
+		posts.map((post) => (
+			<article>
+				<h2>{post.frontmatter.title}</h2>
+				<p>{post.frontmatter.description}</p>
+				<img width="25" src={ImageGitHub} alt="Imagen importando componente" />
+				<br />
+				<a href={post.url}>Read more</a>
+			</article>
+		))
+	}
+</div>

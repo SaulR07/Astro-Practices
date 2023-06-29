@@ -1,0 +1,45 @@
+---
+//Importamos la pagina Layaut
+import Layout from "../layouts/Layout.astro";
+
+// Lo que se encuentra dentro de --- --- es codigo de java script que se ejecuta en el servidor para ser convertido en codigo html
+
+console.log("Esto se ejecuta en el servido, No se vera en la consola del navegador si no en la consola del servidor.");
+
+//Estas variables se convierten en el sever a codi html
+const title = "JSX";
+const classSuccess = "success";
+const classWarning = "warning";
+const classDanger = "danger";
+const arrayHobbies = ["Programar", "Jugar", "Leer"];
+const usuarioActivo = true;
+---
+
+<Layout title={title}>
+	<h1 class={classWarning}>{title}</h1>
+
+	<span>El codigo que se encuentra en medio de las llaves es codigo js <i>Ej. {3 + 3 + 3}</i></span>
+
+	<span>Se puede recorrer un arreglo</span>
+	<ul>
+		{arrayHobbies.map((hobby) => <li class={classDanger}>{hobby}</li>)}
+	</ul>
+
+	<span class={usuarioActivo ? classSuccess : classDanger}>Usuario</span>
+</Layout>
+
+<style>
+	.warning {
+		color: yellow;
+	}
+	.danger {
+		color: red;
+	}
+	.success {
+		color: green;
+	}
+</style>
+
+<script>
+	console.log("Esto se vera en la consola del navegador y no en la del servidor");
+</script>
